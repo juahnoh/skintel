@@ -5,13 +5,19 @@ import HomePage from './pages/HomePage.jsx'
 import BookingsPage from './pages/BookingsPage.jsx'
 import ReportPage from './pages/ReportPage.jsx'
 import ProfilePage from './pages/ProfilePage.jsx'
+import DashboardPage from './pages/DashboardPage.jsx'
+import DashQualityPage from './pages/DashQualityPage.jsx'
+import DashPatientsPage from './pages/DashPatientsPage.jsx'
 
 export default function App() {
   const location = useLocation()
-  const showNav = location.pathname !== '/'
+  const path = location.pathname
+  const isLanding = path === '/'
+  const isDashboard = path.startsWith('/dashboard')
+  const showNav = !isLanding && !isDashboard
 
   return (
-    <div className="app">
+    <div className={`app${isDashboard ? ' wide' : ''}`}>
       <div className="app-scroll">
         <Routes location={location}>
           <Route path="/" element={<LandingPage />} />
@@ -20,6 +26,9 @@ export default function App() {
           <Route path="/report" element={<ReportPage />} />
           <Route path="/report/:id" element={<ReportPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/dashboard/quality" element={<DashQualityPage />} />
+          <Route path="/dashboard/patients" element={<DashPatientsPage />} />
         </Routes>
       </div>
       {showNav && <BottomNav />}

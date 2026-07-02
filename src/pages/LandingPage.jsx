@@ -4,7 +4,6 @@ import faceMain from '../assets/face-main.jpg'
 // 앱 시작 랜딩(온보딩) 화면. 하단 바 없이 풀스크린.
 export default function LandingPage() {
   const navigate = useNavigate()
-  const start = () => navigate('/home')
 
   return (
     <div className="landing">
@@ -25,8 +24,13 @@ export default function LandingPage() {
         </div>
 
         <div className="landing-controls">
-          <button className="start-pill" onClick={start}>
-            시작하기
+          <button className="start-pill patient" onClick={() => navigate('/home')}>
+            <span className="start-role">환자용</span>
+            
+          </button>
+          <button className="start-pill clinic" onClick={() => navigate('/dashboard')}>
+            <span className="start-role">병원용</span>
+            
           </button>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { report, clinic, tipLines } from '../data/sample.js'
+import { report, clinic, tipTotal } from '../data/sample.js'
 import FaceTreatmentMap from '../components/FaceTreatmentMap.jsx'
 import RadialGauge from '../components/RadialGauge.jsx'
 
@@ -7,11 +7,12 @@ export default function ReportPage() {
   const [tab, setTab] = useState('before') // before | after
   const r = report
   const [copied, setCopied] = useState(false)
+  const [showCard, setShowCard] = useState(false)
 
   async function share() {
     const url = window.location.href
     if (navigator.share) {
-      try { await navigator.share({ title: 'Skintel 시술 리포트', url }) } catch {}
+      try { await navigator.share({ title: 'Skintel 울쎄라 인증', text: `${r.patient}님 · 울쎄라 ${r.totalLines}샷 인증`, url }) } catch {}
     } else {
       try { await navigator.clipboard.writeText(url) } catch {}
       setCopied(true)
@@ -51,7 +52,7 @@ export default function ReportPage() {
           <h2>트리트먼트 맵</h2>
           <span className="muted">팁을 선택하면 조사 위치가 선으로 표시돼요</span>
         </div>
-        <FaceTreatmentMap tips={r.tips} />
+        <FaceTreatmentMap tips={r.tips} panels={r.panels} />
       </section>
 
       {/* 깊이별 요약 */}
@@ -66,7 +67,7 @@ export default function ReportPage() {
           </thead>
           <tbody>
             {r.tips.map((t) => {
-              const n = tipLines(t)
+              const n = tipTotal(t.mm)
               return (
                 <tr key={t.mm}>
                   <td><span className="depth-dot" style={{ background: t.tone }} />{t.label}</td>
@@ -128,7 +129,7 @@ export default function ReportPage() {
         </div>
       </section>
 
-      {/* SNS 인증 카드 */}
+      {/* SNS 인증 카드 (인라인 원본) */}
       <section className="cert-card">
         <div className="cert-top">
           <span className="cert-brand">Ulthera®</span>
@@ -161,10 +162,51 @@ export default function ReportPage() {
       <p className="footnote">본 리포트는 시술 장비가 기록한 데이터로 자동 생성됩니다. 결과는 개인에 따라 다를 수 있습니다.</p>
 
       <div className="report-actions">
-        <button className="btn btn-primary" onClick={share}>
-          {copied ? '링크 복사됨 ✓' : '인증 카드 공유'}
+        <button className="btn btn-primary" onClick={() => setShowCard(true)}>
+          인증 카드 공유
         </button>
       </div>
+
+      {showCard && (
+        <div className="card-modal" onClick={() => setShowCard(false)}>
+          <div className="card-modal-inner" onClick={(e) => e.stopPropagation()}>
+            <div className="cert-card cert-card-lg">
+              <div className="cert-top">
+                <span className="cert-brand">Ulthera®</span>
+                <span className="cert-clinic">{clinic.name}</span>
+              </div>
+              <div className="cert-badge">울쎄라 리프팅 인증</div>
+              <div className="cert-hero">
+                <div className="cert-big">{r.totalLines.toLocaleString()}<small>shots</small></div>
+                <div className="cert-metrics">
+                  <div><strong>{r.coverage}%</strong><span>커버리지</span></div>
+                  <div><strong>{r.totalEnergy.toLocaleString()}J</strong><span>에너지</span></div>
+                </div>
+              </div>
+              <div className="cert-improve">
+                <span className="cert-improve-label">시술 전 대비 개선</span>
+                <div className="cert-improve-items">
+                  {r.improve.map((x) => (
+                    <span key={x.label} className="cert-improve-item">{x.label} <b>+{x.delta}%</b></span>
+                  ))}
+                </div>
+              </div>
+              <div className="cert-foot">
+                <span>{r.patient}님 · {r.date}</span>
+                <span className="cert-tags">#울쎄라인증 #리프팅 #SKINTEL</span>
+              </div>
+            </div>
+
+            <p className="card-hint">스크린샷으로 저장해 SNS에 공유해보세요 📸</p>
+            <div className="card-modal-actions">
+              <button className="btn btn-primary" onClick={share}>
+                {copied ? '링크 복사됨 ✓' : '공유하기'}
+              </button>
+              <button className="btn btn-ghost" onClick={() => setShowCard(false)}>닫기</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

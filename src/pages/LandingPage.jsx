@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import faceMain from '../assets/face-main.png'
+import faceMain from '../assets/face-main.jpg'
 
 // 앱 시작 랜딩(온보딩) 화면. 하단 바 없이 풀스크린.
 export default function LandingPage() {

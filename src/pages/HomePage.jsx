@@ -65,7 +65,7 @@ export default function HomePage() {
           <div className="report-teaser-label">최근 시술 리포트</div>
           <div className="report-teaser-title">{report.procedure}</div>
           <div className="muted">
-            총 {report.totalShots.toLocaleString()}샷 · {report.totalEnergy.toLocaleString()}J
+            총 {report.totalLines.toLocaleString()} 샷 · {report.totalEnergy.toLocaleString()}J
           </div>
         </div>
         <img className="report-teaser-thumb" src={report.afterPhoto} alt="" />

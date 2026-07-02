@@ -915,3 +915,210 @@ h1 {
   font-weight: 800;
   color: var(--ink);
 }
+
+/* ---------- Treatment map: tip selector + line shots ---------- */
+.tip-selector {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.tip-chip {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 9px 6px;
+  border-radius: 14px;
+  border: 1.5px solid var(--line);
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--muted);
+  transition: all 0.15s;
+}
+.tip-chip.on {
+  border-color: var(--tone);
+  background: color-mix(in srgb, var(--tone) 12%, #fff);
+  color: var(--tone);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--tone) 30%, transparent);
+}
+.tip-chip-mm {
+  font-size: 15px;
+  font-weight: 800;
+}
+.tip-chip-lines {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.tmap-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.tmap-ai {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(6px);
+  color: var(--muted);
+}
+.tmap-ai.on {
+  background: rgba(139, 111, 196, 0.92);
+  color: #fff;
+}
+
+.tip-info {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--tone) 8%, #fff);
+  border: 1px solid color-mix(in srgb, var(--tone) 22%, transparent);
+}
+.tip-info-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--tone);
+}
+.tip-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--tone);
+}
+.tip-zones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.tip-zone {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(120, 100, 140, 0.07);
+  font-size: 13px;
+}
+.tip-zone strong {
+  color: var(--tone);
+  font-weight: 800;
+}
+
+.depth-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  margin-right: 7px;
+  vertical-align: middle;
+}
+
+/* ---------- Compare (지난 시술 대비) ---------- */
+.compare-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.compare-item {
+  text-align: center;
+  padding: 12px 6px;
+  border-radius: 14px;
+  background: linear-gradient(160deg, rgba(139, 111, 196, 0.12), rgba(224, 138, 168, 0.1));
+}
+.compare-delta {
+  font-size: 18px;
+  font-weight: 800;
+  color: #8b6fc4;
+}
+.compare-note {
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.6;
+}
+.compare-note b {
+  color: var(--accent);
+}
+
+/* ---------- SNS 인증 카드 ---------- */
+.cert-card {
+  border-radius: var(--radius);
+  padding: 20px;
+  color: #fff;
+  background: linear-gradient(140deg, #6a5cae 0%, #a86fb0 55%, #e0a15a 120%);
+  box-shadow: var(--shadow);
+}
+.cert-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.cert-brand {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+.cert-clinic {
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0.9;
+}
+.cert-hero {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+.cert-big {
+  font-size: 46px;
+  font-weight: 800;
+  line-height: 1;
+}
+.cert-big small {
+  font-size: 15px;
+  font-weight: 700;
+  margin-left: 4px;
+  opacity: 0.85;
+}
+.cert-metrics {
+  display: flex;
+  gap: 18px;
+  padding-bottom: 4px;
+}
+.cert-metrics div {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+.cert-metrics strong {
+  font-size: 18px;
+  font-weight: 800;
+}
+.cert-metrics span {
+  font-size: 11px;
+  opacity: 0.85;
+}
+.cert-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 12px;
+}
+.cert-tags {
+  opacity: 0.9;
+  font-weight: 600;
+}

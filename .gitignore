@@ -8,3 +8,14 @@ dist-ssr
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# functions
+functions/.env
+functions/node_modules
+
+firebase-debug.log
+
+# 3D/이미지 에셋은 저장소에서 제외 (별도 zip으로 공유)
+src/assets/
+src/assets.zip
+src/assets copy/

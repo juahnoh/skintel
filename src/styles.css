@@ -1,3 +1,6 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
 :root {
   --ink: #2c2733;
   --muted: #8f8798;
@@ -9,6 +12,20 @@
   --radius: 24px;
   --shadow: 0 10px 30px rgba(120, 95, 160, 0.12);
   --shadow-sm: 0 4px 14px rgba(120, 95, 160, 0.1);
+
+  /* ===== Skintel 리디자인 팔레트 (Figma Skintel-Product) ===== */
+  --teal-900: #3d8597; /* 틸 제목 */
+  --teal-700: #5191a2; /* 틸 라벨 */
+  --teal-100: #c9f0fa; /* 틸 보더/칩 배경 */
+  --teal-050: #e0f8fe;
+  --orange-900: #eb6732; /* 오렌지 제목 */
+  --orange-500: #ff9064; /* 게이지 fill */
+  --orange-100: #ffd7c8; /* 오렌지 카드 보더 */
+  --ink-900: #1b1b1c; /* 숫자값 */
+  --gray-500: #909191; /* 회색 텍스트 */
+  --gray-track: #b5b5b5; /* 게이지 트랙 */
+  --font-en: 'Space Grotesk', 'Pretendard', sans-serif;
+  --font-kr: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 * {
@@ -24,7 +41,7 @@ body,
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', Roboto, sans-serif;
+  font-family: var(--font-kr);
   color: var(--ink);
   line-height: 1.5;
   background: linear-gradient(165deg, #ece7f7 0%, #f3ebf1 45%, #f7ece7 78%, #f7ede8 100%);
@@ -75,39 +92,36 @@ button {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: max(env(safe-area-inset-bottom), 14px);
+  bottom: max(env(safe-area-inset-bottom), 16px);
+  z-index: 50;
   width: auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 4px;
-  padding: 5px 8px;
-  background: rgba(255, 255, 255, 0.72);
+  gap: 8px;
+  padding: 4px 10px;
+  background: rgba(250, 250, 250, 0.72);
   backdrop-filter: blur(20px) saturate(1.4);
   -webkit-backdrop-filter: blur(20px) saturate(1.4);
   border: 1px solid rgba(255, 255, 255, 0.7);
-  border-radius: 22px;
-  box-shadow: 0 10px 28px rgba(90, 70, 130, 0.16);
+  border-radius: 26px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
 }
 .nav-item {
   text-decoration: none;
-  color: var(--muted);
+  color: #aaaaaa;
 }
 .nav-ico {
-  width: 46px;
-  height: 34px;
+  width: 48px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 13px;
-  transition: background 0.18s, color 0.18s;
+  border-radius: 14px;
+  transition: color 0.18s;
 }
 .nav-item.active {
-  color: #fff;
-}
-.nav-item.active .nav-ico {
-  background: linear-gradient(135deg, var(--accent), #a986d6);
-  box-shadow: 0 5px 13px rgba(139, 111, 196, 0.38);
+  color: #1a1a1a;
 }
 .nav-icon {
   width: 22px;
@@ -336,6 +350,235 @@ h1 {
   border-radius: 16px;
   object-fit: cover;
   object-position: top;
+}
+
+/* ================= HOME 리디자인 (Figma Skintel) ================= */
+.page.home {
+  background: #fff;
+  gap: 18px;
+  padding-top: max(env(safe-area-inset-top), 20px);
+}
+
+/* 헤더 — Hello, Jane */
+.hm-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-en);
+  font-size: 26px;
+  font-weight: 400;
+  color: #000;
+  letter-spacing: -0.5px;
+  margin: 6px 0 2px;
+}
+.hm-head b {
+  font-weight: 700;
+}
+.hm-share {
+  border: none;
+  background: none;
+  padding: 6px;
+  cursor: pointer;
+  color: #1a1a1a;
+}
+.hm-share svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* 지난 시술 대비 */
+.cmp-card {
+  border: 1px solid var(--teal-100);
+  background: rgba(220, 220, 220, 0.12);
+  border-radius: 20px;
+  padding: 14px 12px 16px;
+}
+.cmp-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--teal-900);
+  text-align: center;
+  margin: 0 0 12px;
+}
+.cmp-cells {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.cmp-cell {
+  background: radial-gradient(
+    ellipse 90% 90% at 50% 45%,
+    rgba(224, 248, 254, 0.45) 0%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
+  border-radius: 18px;
+  padding: 13px 6px;
+  text-align: center;
+}
+.cmp-val {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink-900);
+}
+.cmp-tri {
+  width: 15px;
+  height: 15px;
+  flex: none;
+}
+.cmp-label {
+  margin-top: 5px;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--teal-700);
+}
+
+/* 얼굴 시술 맵 */
+.fmap-face {
+  position: relative;
+  width: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #eeedef;
+}
+.fmap-face > img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+.fmap-canvas {
+  position: absolute;
+  inset: 0;
+  touch-action: none;
+}
+.fmap-divider {
+  position: absolute;
+  left: 50%;
+  top: 4%;
+  bottom: 22%;
+  width: 0;
+  border-left: 1.5px dashed rgba(255, 255, 255, 0.7);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.fmap-loading {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gray-500);
+  white-space: nowrap;
+}
+.fmap-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.fmap-toggle {
+  position: absolute;
+  left: 50%;
+  bottom: 15%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 3px;
+  padding: 3px;
+  background: rgba(229, 229, 229, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+}
+.fmap-toggle button {
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-en);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--gray-500);
+  background: transparent;
+  padding: 6px 15px;
+  border-radius: 10px;
+  transition: background 0.15s, color 0.15s;
+}
+.fmap-toggle button.on {
+  background: var(--teal-100);
+  color: var(--teal-900);
+}
+.fmap-chips {
+  position: absolute;
+  left: 50%;
+  bottom: 4%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+.fmap-chip {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  padding: 5px 11px;
+  border-radius: 13px;
+  border: 1px solid #c9c9c9;
+  background: rgba(250, 250, 250, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+  color: var(--gray-500);
+  white-space: nowrap;
+}
+.fmap-chip-mm {
+  font-size: 8px;
+  font-weight: 600;
+}
+.fmap-chip-shot {
+  font-size: 8px;
+  font-weight: 500;
+}
+.fmap-chip.on {
+  border-color: var(--teal-700);
+  background: rgba(201, 240, 250, 0.6);
+  color: var(--teal-900);
+}
+
+/* 피부 개선 지표 */
+.skin-card {
+  border: 1px solid var(--orange-100);
+  background: rgba(221, 221, 221, 0.12);
+  border-radius: 20px;
+  padding: 14px 12px 18px;
+}
+.skin-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--orange-900);
+  text-align: center;
+  margin: 0 0 14px;
+}
+.skin-gauges {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+}
+.gauge-thick {
+  gap: 8px;
+}
+.skin-card .gauge-value {
+  fill: var(--ink-900);
+  font-size: 16px;
+  font-weight: 600;
+}
+.skin-card .gauge-label {
+  color: var(--orange-900);
+  font-size: 10px;
+  font-weight: 500;
 }
 
 /* ---------- Page head ---------- */
@@ -813,6 +1056,39 @@ h1 {
   overflow: hidden;
   background: linear-gradient(180deg, #eae4f2 0%, #f4ece9 100%);
 }
+/* 배경 없는 미니멀 랜딩 */
+.landing.clean {
+  background: #f7f7f8;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: max(env(safe-area-inset-top), 64px) 26px max(env(safe-area-inset-bottom), 30px);
+}
+.landing.clean .landing-top {
+  margin-top: 8vh;
+}
+.landing-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+.landing-logo .splash-mark {
+  width: 26px;
+  height: 26px;
+}
+.landing-logo .splash-word {
+  font-size: 28px;
+}
+.landing.clean .landing-title {
+  font-size: 32px;
+}
+.landing.clean .role-card {
+  background: #fff;
+  border: 1px solid #ececee;
+  box-shadow: 0 4px 16px rgba(60, 50, 70, 0.05);
+  backdrop-filter: none;
+}
 .landing-photo {
   position: absolute;
   top: 0;
@@ -914,6 +1190,114 @@ h1 {
   font-size: 16px;
   font-weight: 800;
   color: var(--ink);
+}
+
+/* ---------- 스플래시(로딩) ---------- */
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f7f7f8;
+  transition: opacity 0.45s ease;
+}
+.splash.leaving {
+  opacity: 0;
+  pointer-events: none;
+}
+.splash-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: splash-pop 0.6s ease both;
+}
+.splash-mark {
+  width: 30px;
+  height: 30px;
+  border-radius: 50% 50% 50% 3px;
+  background: #1a1a1a;
+}
+.splash-word {
+  font-family: var(--font-en);
+  font-weight: 600;
+  font-size: 34px;
+  letter-spacing: -0.5px;
+  color: #1a1a1a;
+}
+@keyframes splash-pop {
+  from { opacity: 0; transform: translateY(6px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-color-scheme: dark) {
+  .splash { background: #1c1c1e; }
+  .splash-mark { background: #fff; }
+  .splash-word { color: #fff; }
+}
+
+/* ---------- 랜딩 역할 선택 카드 ---------- */
+.landing-roles {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 6px;
+}
+.role-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 6px 20px rgba(60, 50, 70, 0.08);
+  text-align: left;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.role-card:active {
+  transform: scale(0.985);
+  box-shadow: 0 3px 12px rgba(60, 50, 70, 0.1);
+}
+.role-ic {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+.role-ic svg {
+  width: 23px;
+  height: 23px;
+}
+.role-card.patient .role-ic { background: #e6f2f4; color: #3d8597; }
+.role-card.clinic .role-ic { background: #eee9f6; color: #6a5aa0; }
+.role-card.operator .role-ic { background: #fdede4; color: #e07a4a; }
+.role-txt {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 2px;
+  min-width: 0;
+}
+.role-txt b {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ink);
+}
+.role-txt em {
+  font-size: 12.5px;
+  font-style: normal;
+  color: var(--muted);
+}
+.role-arrow {
+  color: var(--muted);
+  font-size: 18px;
+  flex: none;
 }
 
 /* ---------- Treatment map: tip selector + line shots ---------- */
@@ -1141,7 +1525,7 @@ h1 {
 
 /* ---------- Doctor dashboard ---------- */
 .app.wide {
-  max-width: 1040px;
+  max-width: 1200px;
 }
 .dashboard {
   padding: max(env(safe-area-inset-top), 22px) 20px 40px;
@@ -1686,4 +2070,957 @@ h1 {
   .cert-card-lg .cert-big { font-size: 38px; }
   .cert-big small { font-size: 13px; }
   .cert-metrics { gap: 10px; }
+}
+
+/* ================= 시술자(Operator) 화면 ================= */
+.op {
+  background: #fff;
+  min-height: 100%;
+  padding: 28px 32px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  color: #1a1a1a;
+}
+.op-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-en);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: -0.5px;
+}
+.op-logo {
+  width: 22px;
+  height: 22px;
+  border-radius: 50% 50% 50% 2px;
+  background: #1a1a1a;
+  display: inline-block;
+}
+.op-title {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  margin: 4px 0 2px;
+}
+.op-title.center { text-align: center; }
+
+.op-card {
+  background: #f4f4f5;
+  border-radius: 22px;
+  padding: 24px 26px 28px;
+}
+.op-card-title {
+  font-size: 19px;
+  font-weight: 700;
+  margin: 0 0 18px;
+}
+.op-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px 28px;
+}
+.op-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.op-field > span {
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+}
+.op-field input,
+.op-field select {
+  border: none;
+  background: #e4e4e6;
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 16px;
+  font-family: inherit;
+  color: #1a1a1a;
+  outline: none;
+  appearance: none;
+}
+.op-field input::placeholder { color: #9a9a9d; }
+.op-field input.active,
+.op-field input:focus {
+  background: #fff;
+  border: 1.5px solid var(--orange-500);
+  padding: 12.5px 14.5px;
+}
+.op-field select {
+  background-image: linear-gradient(45deg, transparent 50%, #888 50%), linear-gradient(135deg, #888 50%, transparent 50%);
+  background-position: calc(100% - 20px) 20px, calc(100% - 14px) 20px;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}
+.op-readonly {
+  background: #e4e4e6;
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 16px;
+  min-height: 20px;
+}
+
+.op-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.op-actions.center { justify-content: center; }
+.op-btn {
+  border: none;
+  border-radius: 14px;
+  padding: 15px 28px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: filter 0.15s, opacity 0.15s;
+}
+.op-btn:disabled { opacity: 0.55; cursor: default; }
+.op-btn.primary {
+  background: linear-gradient(135deg, #ffa06e, #f97a4d);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(249, 122, 77, 0.32);
+}
+.op-btn.accent {
+  background: #fff2ea;
+  color: var(--orange-900);
+  border: 1.5px solid var(--orange-100);
+}
+.op-btn.ghost {
+  background: #fff;
+  color: var(--orange-900);
+  border: 1.5px solid var(--orange-500);
+}
+.op-error {
+  color: #d34a2f;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* 코드 발급 */
+.op-issued {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 26px;
+  align-items: stretch;
+}
+.op-code-card {
+  border: 1.5px solid var(--orange-500);
+  border-radius: 22px;
+  padding: 28px 30px;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(circle at 70% 55%, rgba(255, 144, 100, 0.16), transparent 60%),
+    #fff;
+  position: relative;
+  overflow: hidden;
+}
+.op-code-label {
+  color: var(--orange-900);
+  font-weight: 700;
+  font-size: 18px;
+}
+.op-code {
+  margin: auto;
+  font-family: var(--font-en);
+  font-size: 72px;
+  font-weight: 700;
+  letter-spacing: 14px;
+  color: var(--orange-500);
+  text-indent: 14px;
+}
+
+/* 시술 진행 패드 */
+.op-pad { padding-bottom: 28px; }
+.op-pad-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.op-pad-meta { display: flex; align-items: center; gap: 10px; }
+.op-chip {
+  background: #f0f0f1;
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.op-chip.code { background: #fff2ea; color: var(--orange-900); }
+.op-status {
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  background: #eee;
+  color: #666;
+}
+.op-status.in_progress { background: #e7f8ec; color: #1e9e54; }
+.op-status.completed { background: #eef0ff; color: #5560d8; }
+
+.op-pad-body {
+  display: flex;
+  gap: 24px;
+  align-items: stretch;
+}
+.op-pad-face {
+  position: relative;
+  flex: 1;
+  height: min(72vh, 660px);
+  background: #eeedef;
+  border-radius: 24px;
+  overflow: hidden;
+}
+.op-pad-side {
+  width: 280px;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.op-count-total {
+  background: #f4f4f5;
+  border-radius: 20px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.op-count-total .n {
+  font-family: var(--font-en);
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--orange-900);
+}
+.op-count-total .l { margin-top: 6px; font-size: 14px; color: #777; }
+.op-count-list {
+  background: #f4f4f5;
+  border-radius: 20px;
+  padding: 8px 18px;
+}
+.op-count-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid #e6e6e8;
+}
+.op-count-row:last-child { border-bottom: none; }
+.op-count-row .dot { width: 12px; height: 12px; border-radius: 50%; }
+.op-count-row .mm { font-weight: 600; }
+.op-count-row .v { margin-left: auto; font-weight: 700; font-family: var(--font-en); }
+.op-avatar-state {
+  font-size: 14px;
+  color: #666;
+  padding: 4px 2px;
+}
+.op-pad-controls { display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
+.op-pad-controls .op-btn { width: 100%; }
+.op-done { font-weight: 700; color: #1e9e54; }
+.op-loading, .op-error { padding: 40px; }
+
+/* ---- 시술자 화면 반응형 ---- */
+@media (max-width: 900px) {
+  .op { padding: 22px 18px 40px; gap: 18px; }
+  .op-title { font-size: 24px; }
+  .op-card { padding: 20px 20px 22px; }
+  .op-card-title { font-size: 17px; margin-bottom: 14px; }
+  .op-pad-body { flex-direction: column; }
+  .op-pad-side { width: 100%; }
+  .op-pad-face { height: 50vh; min-height: 340px; }
+  .op-code { font-size: 60px; letter-spacing: 12px; }
+  .op-code-card { min-height: 200px; }
+}
+@media (max-width: 520px) {
+  .op { padding: 18px 14px 34px; }
+  .op-title { font-size: 21px; }
+  .op-brand { font-size: 20px; }
+  .op-code { font-size: 46px; letter-spacing: 8px; text-indent: 8px; }
+  .op-btn { padding: 14px 18px; font-size: 15px; flex: 1 1 auto; }
+  .op-pad-head { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .op-pad-meta { flex-wrap: wrap; }
+}
+
+/* 시술 패드 - 단계 오버레이 */
+.op-scan-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 9%;
+  pointer-events: none;
+}
+.op-scan-msg {
+  background: rgba(20, 20, 22, 0.55);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 9px 18px;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  text-align: center;
+}
+.op-scan-msg.pulse { animation: op-pulse 1.2s ease-in-out infinite; }
+.op-scan-overlay.scanning .op-scan-line {
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #3fd0ff, transparent);
+  box-shadow: 0 0 14px #3fd0ff;
+  animation: op-scan 2.1s ease-in-out infinite alternate;
+}
+@keyframes op-scan { from { top: 12%; } to { top: 88%; } }
+@keyframes op-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
+
+/* 시술 계획 - 목표 샷수 입력 */
+.op-plan {
+  background: #f4f4f5;
+  border-radius: 20px;
+  padding: 16px 18px;
+}
+.op-plan-title { font-weight: 700; font-size: 14px; margin-bottom: 10px; }
+.op-plan-row { display: flex; align-items: center; gap: 10px; padding: 7px 0; }
+.op-plan-row .dot { width: 12px; height: 12px; border-radius: 50%; }
+.op-plan-row .mm { font-weight: 600; font-size: 14px; }
+.op-plan-input {
+  margin-left: auto;
+  width: 78px;
+  text-align: right;
+  border: 1.5px solid #dcdcde;
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-family: var(--font-en);
+  font-weight: 700;
+  font-size: 15px;
+  background: #fff;
+  color: #1a1a1a;
+}
+.op-plan-input:focus { border-color: var(--orange-500); outline: none; }
+.op-plan-total {
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid #e6e6e8;
+  font-size: 14px;
+  color: #666;
+  text-align: right;
+}
+.op-plan-total b { font-family: var(--font-en); color: var(--orange-900); font-size: 16px; }
+.op-count-total .n em { font-size: 26px; font-weight: 600; color: #b6b6b9; font-style: normal; font-family: var(--font-en); }
+.op-count-row .v em { color: #a0a0a3; font-weight: 600; font-style: normal; }
+
+/* ================= 시술중 화면 (목업) ================= */
+.oplive { background: #fff; min-height: 100%; padding: 22px 28px 28px; display: flex; flex-direction: column; gap: 18px; color: #1a1a1a; }
+.oplive-head { display: flex; align-items: center; gap: 40px; }
+.oplive-meta { display: flex; gap: 40px; }
+.oplive-metacol { display: flex; flex-direction: column; gap: 3px; }
+.oplive-metacol .l { font-size: 12px; color: #9a9a9d; }
+.oplive-metacol .v { font-size: 16px; font-weight: 700; }
+
+.oplive-body { display: flex; gap: 22px; align-items: stretch; }
+.oplive-face { position: relative; flex: 1.7; height: min(70vh, 620px); background: #eeedef; border-radius: 22px; overflow: hidden; }
+.oplive-legend { position: absolute; left: 0; right: 0; bottom: 14px; display: flex; justify-content: center; gap: 18px; font-size: 12px; color: #666; pointer-events: none; }
+.oplive-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.oplive-legend .lg { width: 16px; height: 12px; border-radius: 3px; display: inline-block; }
+.oplive-legend .lg.done { background: #bfe6f5; }
+.oplive-legend .lg.plan { background: #d8d8da; }
+.oplive-legend .lg.warn { background: #ff9a6b; }
+
+.oplive-panel { flex: 1; min-width: 300px; background: #f5f7fb; border: 1px solid #e7ecf4; border-radius: 22px; padding: 20px; display: flex; flex-direction: column; }
+.oplive-total-label { color: var(--teal-900); font-size: 13px; font-weight: 700; }
+.oplive-total { font-family: var(--font-en); margin-top: 2px; }
+.oplive-total b { font-size: 40px; font-weight: 700; }
+.oplive-total span { font-size: 20px; color: #9aa4b2; font-weight: 600; }
+.oplive-bar { height: 6px; border-radius: 999px; background: #e2e8f0; overflow: hidden; margin: 10px 0 16px; }
+.oplive-bar i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #7fd8ef, #3fb6d8); }
+
+.oplive-depths { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.oplive-depth { background: #fff; border-radius: 14px; padding: 12px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.oplive-depth .mm { font-weight: 700; font-size: 14px; }
+.oplive-depth .n { font-family: var(--font-en); font-weight: 700; font-size: 15px; color: #666; margin-top: 4px; }
+
+.oplive-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+.oplive-metric { background: #fff; border-radius: 14px; padding: 12px 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.oplive-metric .lbl { font-size: 11px; color: #8a8a8d; }
+.oplive-metric .val { font-family: var(--font-en); font-size: 26px; font-weight: 700; color: var(--teal-900); line-height: 1.1; }
+.oplive-metric .val em { font-size: 14px; font-style: normal; }
+.oplive-metric .sub { font-size: 11px; color: #9a9a9d; }
+
+.oplive-rows-title { font-weight: 700; font-size: 14px; margin: 16px 0 8px; }
+.oplive-rows { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
+.oplive-row { display: flex; align-items: center; gap: 12px; background: #fff; border-radius: 14px; padding: 14px 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.oplive-row .rdot { width: 16px; height: 16px; border-radius: 50%; flex: none; border: 4px solid #cfe9f4; background: transparent; box-sizing: border-box; }
+.oplive-row .rdot.done { border-color: #7fd0e6; }
+.oplive-row .rdot.plan { border-color: #cfe9f4; }
+.oplive-row .rdot.warn { border-color: #ffc4a8; }
+.oplive-row .rlabel { font-weight: 600; font-size: 15px; }
+.oplive-row .rval { margin-left: auto; font-family: var(--font-en); font-weight: 700; font-size: 16px; }
+.oplive-row .rval em { color: #a0a0a3; font-style: normal; font-weight: 600; }
+
+.oplive-actions { display: flex; gap: 10px; margin-top: 16px; }
+.oplive-actions .op-btn { flex: 1; }
+
+@media (max-width: 940px) {
+  .oplive-body { flex-direction: column; }
+  .oplive-face { height: 46vh; min-height: 320px; }
+  .oplive-head { gap: 20px; flex-wrap: wrap; }
+  .oplive-meta { gap: 22px; flex-wrap: wrap; }
+}
+
+/* ================= 병원 대시보드 셸 ================= */
+.dashx { background: #fff; min-height: 100%; }
+.dashx-head { display: flex; align-items: center; gap: 30px; padding: 22px 26px 4px; }
+.dashx-clinic { display: flex; flex-direction: column; gap: 2px; }
+.dashx-clinic span { font-size: 12px; color: #9a9a9d; }
+.dashx-clinic b { font-size: 18px; font-weight: 800; }
+.dashx-body { display: flex; flex-direction: column; gap: 18px; padding: 16px 26px 110px; }
+.dashx-nav {
+  position: fixed; left: 50%; transform: translateX(-50%); bottom: 18px; z-index: 30;
+  display: flex; gap: 8px; padding: 6px 12px;
+  background: rgba(250, 250, 250, 0.92); backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid rgba(0, 0, 0, 0.06); border-radius: 26px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
+}
+.dashx-tab { display: flex; align-items: center; justify-content: center; width: 54px; height: 42px; border-radius: 14px; color: #b0b0b3; }
+.dashx-tab.active { color: #1a1a1a; }
+.dashx-ico { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ===== 시술 커버리지 페이지 ===== */
+.dq-row1 { display: grid; grid-template-columns: 1.5fr 1.2fr 1fr; gap: 16px; }
+.dq-card { background: #f7f7f8; border-radius: 20px; padding: 18px 20px; }
+.dq-card-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; gap: 8px; }
+.dq-card-head h2 { font-size: 16px; font-weight: 800; margin: 0; }
+.dq-since { font-size: 12px; color: #9a9a9d; white-space: nowrap; }
+.muted.sm { font-size: 12px; }
+
+.dq-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.dq-kpi { background: #fff; border: 1px solid #fbe3d7; border-radius: 14px; padding: 12px 13px; }
+.dq-kpi.flag { border-color: #cfeaf5; background: #f5fbfe; }
+.dq-kpi-label { font-size: 11px; color: #8a8a8d; line-height: 1.35; min-height: 30px; }
+.dq-kpi-val { font-family: var(--font-en); font-size: 26px; font-weight: 700; line-height: 1.1; }
+.dq-kpi-val em { font-size: 13px; font-style: normal; color: #8a8a8d; margin-left: 2px; }
+.dq-kpi-delta { font-size: 12px; font-weight: 700; margin-top: 3px; }
+.dq-kpi-delta.up { color: #f97a4d; }
+.dq-kpi-delta.down { color: #3fb6d8; }
+
+.dq-docs { display: flex; flex-direction: column; gap: 15px; }
+.dq-doc { display: flex; align-items: center; gap: 12px; }
+.dq-doc-name { width: 88px; font-size: 14px; font-weight: 600; }
+.dq-doc-bar { flex: 1; height: 12px; background: #e8e8ea; border-radius: 999px; overflow: hidden; }
+.dq-doc-bar i { display: block; height: 100%; background: linear-gradient(90deg, #ffb08a, #f97a4d); border-radius: 999px; }
+.dq-doc-val { width: 76px; text-align: right; font-size: 14px; font-weight: 700; font-family: var(--font-en); }
+.dq-doc-val em { color: #f97a4d; font-style: normal; font-size: 12px; }
+
+.dq-spark { width: 100%; margin-top: 4px; }
+.dq-spark-x { font-size: 10px; fill: #9a9a9d; font-family: var(--font-en); }
+
+.dq-filters { display: flex; align-items: center; gap: 14px; background: #f0f0f1; border-radius: 18px; padding: 12px 16px; flex-wrap: wrap; }
+.dq-filters-title { font-weight: 800; font-size: 15px; margin-right: 4px; }
+.dq-tabs { display: flex; gap: 4px; background: #e2e2e4; border-radius: 12px; padding: 4px; }
+.dq-tabs.right { margin-left: auto; }
+.dq-tabs button { border: none; background: transparent; padding: 8px 16px; border-radius: 9px; font-size: 14px; font-weight: 600; color: #8a8a8d; cursor: pointer; font-family: inherit; }
+.dq-tabs button.on { background: #fff; color: #1a1a1a; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); }
+
+.dq-body { display: flex; gap: 18px; align-items: stretch; }
+.dq-face { position: relative; flex: 1; min-width: 300px; height: min(58vh, 520px); background: #eeedef; border-radius: 20px; overflow: hidden; }
+.dq-detail { flex: 1.25; background: #f7f7f8; border-radius: 20px; padding: 22px 24px; display: grid; grid-template-columns: 1fr 236px; grid-template-rows: auto 1fr; gap: 16px 20px; }
+.dq-detail-title { grid-column: 1 / -1; font-size: 22px; font-weight: 800; margin: 0; }
+.dq-table { grid-column: 1; grid-row: 2; display: flex; flex-direction: column; gap: 8px; align-content: start; }
+.dq-table-head { display: grid; grid-template-columns: 1fr 74px 74px; padding: 0 16px 2px; font-size: 13px; color: #8a8a8d; }
+.dq-table-head span { text-align: center; }
+.dq-table-head span:first-child { text-align: left; }
+.dq-zrow { display: grid; grid-template-columns: 1fr 74px 74px; align-items: center; background: #fff; border: 1.5px solid transparent; border-radius: 14px; padding: 14px 16px; cursor: pointer; font-family: inherit; }
+.dq-zrow.on { border-color: #7fc8e0; }
+.dq-zrow .zid { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 15px; }
+.dq-zrow .zdot { width: 9px; height: 9px; border-radius: 50%; background: #7fd8ef; }
+.dq-zrow .zv { text-align: center; font-family: var(--font-en); font-weight: 700; font-size: 16px; }
+
+.dq-insight { grid-column: 2; grid-row: 2; background: #fff; border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 12px; align-self: start; }
+.dq-insight-ico { width: 36px; height: 36px; border-radius: 50%; background: #fff2ea; color: #f97a4d; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.dq-insight p { font-size: 14px; line-height: 1.6; margin: 0; font-weight: 500; }
+.dq-insight p b { color: #f97a4d; }
+.dq-insight-actions { display: flex; gap: 8px; margin-top: 4px; flex-wrap: wrap; }
+.op-btn.sm { padding: 10px 14px; font-size: 13px; }
+
+@media (max-width: 1000px) {
+  .dq-row1 { grid-template-columns: 1fr; }
+  .dq-body { flex-direction: column; }
+  .dq-face { height: 46vh; min-height: 320px; }
+  .dq-detail { grid-template-columns: 1fr; }
+  .dq-insight { grid-column: 1; grid-row: auto; }
+  .dq-table { grid-row: auto; }
+}
+
+/* ===== 병원 홈 (환자 검색·시술 시작) ===== */
+.ch-body { display: flex; gap: 22px; align-items: flex-start; }
+.ch-left { width: 320px; flex: none; display: flex; flex-direction: column; gap: 14px; }
+.ch-newlink { align-self: flex-start; background: none; border: none; color: var(--orange-900); font-size: 18px; font-weight: 800; cursor: pointer; padding: 4px 0; }
+.ch-search { display: flex; align-items: center; gap: 8px; background: #efeff1; border-radius: 12px; padding: 12px 14px; }
+.ch-search-ico { width: 18px; height: 18px; fill: none; stroke: #9a9a9d; stroke-width: 2; stroke-linecap: round; }
+.ch-search input { border: none; background: none; outline: none; font-size: 14px; font-family: inherit; flex: 1; color: #1a1a1a; }
+.ch-list { display: flex; flex-direction: column; gap: 10px; }
+.ch-pcard { display: flex; align-items: center; gap: 10px; background: #f4f4f5; border: 1.5px solid transparent; border-radius: 16px; padding: 14px 16px; }
+.ch-pcard.on { border-color: var(--orange-500); background: #fff; box-shadow: 0 2px 12px rgba(249, 122, 77, 0.12); }
+.ch-pinfo { flex: 1; }
+.ch-pname { font-weight: 700; font-size: 15px; }
+.ch-pcode { color: #9a9a9d; font-weight: 600; font-family: var(--font-en); }
+.ch-pmeta { font-size: 12px; color: #9a9a9d; margin-top: 2px; }
+.ch-ptoggle { border: none; background: none; color: #8a8a8d; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; }
+.ch-pcard.on .ch-ptoggle { color: var(--orange-900); }
+
+.ch-detail { flex: 1; border: 1.5px solid var(--orange-100); border-radius: 22px; padding: 24px 28px; min-height: 520px; }
+.ch-empty { display: flex; align-items: center; justify-content: center; }
+.ch-detail-head h2 { font-size: 20px; font-weight: 800; margin: 0 0 20px; }
+.ch-pcode { }
+.ch-plan-top { display: flex; align-items: flex-start; gap: 16px; }
+.ch-history { width: 160px; flex: none; }
+.ch-history-label { font-size: 13px; color: #9a9a9d; margin-bottom: 10px; }
+.ch-history-row { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; margin-bottom: 7px; }
+.ch-plan-title { flex: 1; text-align: center; font-weight: 700; font-size: 15px; padding-top: 2px; }
+.ch-plan-total { font-weight: 700; font-size: 15px; white-space: nowrap; }
+.ch-chips { display: flex; gap: 12px; justify-content: center; margin: 16px 0; flex-wrap: wrap; }
+.ch-chip { border: 1.5px solid var(--c); border-radius: 12px; padding: 10px 18px; font-weight: 600; font-size: 14px; background: #fff; }
+.ch-face { position: relative; height: 320px; background: #eeedef; border-radius: 16px; overflow: hidden; margin-bottom: 16px; }
+.ch-actions { display: flex; justify-content: flex-end; }
+.ch-actions .op-btn { min-width: 200px; }
+
+@media (max-width: 900px) {
+  .ch-body { flex-direction: column; }
+  .ch-left { width: 100%; }
+  .ch-detail { width: 100%; }
+}
+
+/* ===== 환자 관리 페이지 ===== */
+.pm-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.pm-kpi { display: flex; align-items: center; gap: 16px; background: #f7f7f8; border-radius: 18px; padding: 20px 24px; }
+.pm-kpi-ico { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; flex: none; }
+.pm-kpi.blue .pm-kpi-ico { background: #eaf3fb; }
+.pm-kpi.orange .pm-kpi-ico { background: #fff2ea; }
+.pm-kpi-ico svg { width: 26px; height: 26px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.pm-kpi.blue .pm-kpi-ico svg { stroke: #5a8fc0; }
+.pm-kpi.orange .pm-kpi-ico svg { stroke: #f97a4d; }
+.pm-kpi-text .l { font-size: 14px; color: #8a8a8d; }
+.pm-kpi-text .v { font-family: var(--font-en); font-size: 30px; font-weight: 700; line-height: 1.1; }
+.pm-kpi-text .v em { font-size: 14px; color: #8a8a8d; font-style: normal; margin-left: 3px; font-family: var(--font-kr); }
+
+.pm-panel { background: #f7f7f8; border-radius: 22px; padding: 24px 28px; }
+.pm-panel-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+.pm-panel-head h2 { font-size: 22px; font-weight: 800; margin: 0; }
+.pm-search { display: flex; align-items: center; gap: 8px; background: #e8e8ea; border-radius: 12px; padding: 12px 16px; width: 340px; max-width: 42%; }
+.pm-search input { border: none; background: none; outline: none; flex: 1; font-size: 14px; font-family: inherit; color: #1a1a1a; }
+.pm-search svg { width: 16px; height: 16px; fill: none; stroke: #9a9a9d; stroke-width: 2; stroke-linecap: round; }
+.pm-filters { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
+
+.pm-table { display: flex; flex-direction: column; }
+.pm-thead, .pm-row { display: grid; grid-template-columns: 1.3fr 1.6fr 1fr 1fr; align-items: center; padding: 16px 10px; }
+.pm-thead { color: #8a8a8d; font-size: 14px; border-bottom: 1px solid #e4e4e6; }
+.pm-row { border-bottom: 1px solid #ededef; }
+.pm-row:hover { background: #fff; border-radius: 12px; }
+.pm-thead .right, .pm-row .right { text-align: right; }
+.pm-name { font-weight: 700; }
+.pm-go { border: none; background: none; cursor: pointer; font-size: 20px; color: #1a1a1a; padding: 0 4px; }
+
+@media (max-width: 900px) {
+  .pm-kpis { grid-template-columns: 1fr; }
+  .pm-search { max-width: none; width: 180px; }
+  .pm-table { overflow-x: auto; }
+  .pm-thead, .pm-row { min-width: 560px; }
+}
+
+/* ===== 환자 코드 입력 ===== */
+.code-page {
+  min-height: 100%;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 24px calc(env(safe-area-inset-bottom) + 26px);
+}
+.code-center { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.code-title { font-size: 28px; font-weight: 800; margin: 0; letter-spacing: -0.4px; }
+.code-sub { color: #9a9a9d; margin: 12px 0 34px; font-size: 15px; }
+.code-boxes { display: flex; gap: 12px; }
+.code-box {
+  width: 58px; height: 66px;
+  border: 1.5px solid #e2e2e4; border-radius: 14px;
+  background: #f5f5f6; text-align: center;
+  font-size: 26px; font-weight: 700; font-family: var(--font-en);
+  outline: none; color: #1a1a1a;
+  transition: border-color 0.15s, background 0.15s;
+}
+.code-box.filled, .code-box:focus { border-color: var(--orange-500); background: #fff; }
+.code-error { color: #d34a2f; margin-top: 18px; font-size: 14px; font-weight: 600; }
+.code-continue {
+  width: 100%; padding: 18px; border: none; border-radius: 16px;
+  background: #c9c9cb; color: #fff; font-size: 17px; font-weight: 700;
+  font-family: inherit; cursor: pointer; transition: background 0.15s;
+}
+.code-continue.on { background: linear-gradient(135deg, #ffa06e, #f97a4d); }
+.code-continue:disabled { cursor: default; }
+
+/* ===== 환자 홈 글래스모피즘 리디자인 ===== */
+.page.home {
+  background: linear-gradient(180deg, #eef2f6 0%, #f4f1ee 52%, #ffffff 100%);
+}
+.hm-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.hm-card {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.42);
+  backdrop-filter: blur(24px) saturate(1.35);
+  -webkit-backdrop-filter: blur(24px) saturate(1.35);
+  border: 1px solid var(--teal-100);
+  border-radius: 24px;
+  box-shadow: 0 10px 34px rgba(80, 120, 140, 0.12);
+  padding: 18px 16px 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.hm-sec-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--teal-900);
+  margin: 0 4px 10px;
+}
+.hm-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.hm-tile {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 18px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 3px 12px rgba(120, 140, 160, 0.09);
+  padding: 15px 6px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.hm-tile b {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink-900);
+  line-height: 1;
+}
+.hm-tile span {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--teal-700);
+}
+.hm-tile-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+/* 카드가 얼굴 상단을 덮어 유리 너머로 비치게 */
+.hm-face {
+  position: relative;
+  z-index: 1;
+  margin-top: -74px;
+}
+/* 지표 카드도 글래스 톤 통일 */
+.skin-card {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(18px) saturate(1.3);
+  -webkit-backdrop-filter: blur(18px) saturate(1.3);
+  border: 1px solid var(--orange-100);
+  box-shadow: 0 8px 26px rgba(150, 120, 110, 0.1);
+}
+
+/* ===== 달력 · 과거 시술 내역 (글래스) ===== */
+.page.cal {
+  background: linear-gradient(180deg, #eef2f6 0%, #f4f1ee 52%, #ffffff 100%);
+  gap: 16px;
+}
+.cal-card, .hist-card {
+  background: rgba(255, 255, 255, 0.52);
+  backdrop-filter: blur(20px) saturate(1.3);
+  -webkit-backdrop-filter: blur(20px) saturate(1.3);
+  border-radius: 24px;
+  box-shadow: 0 8px 26px rgba(120, 140, 160, 0.1);
+  padding: 18px 18px 22px;
+}
+.cal-card { border: 1px solid var(--teal-100); }
+.hist-card { border: 1px solid var(--orange-100); }
+
+.cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; width: auto; height: auto; background: none; border-radius: 0; box-shadow: none; }
+.cal-nav button { border: none; background: none; font-size: 22px; color: #8a8a8d; cursor: pointer; width: 34px; height: 34px; flex: none; }
+.cal-month { font-weight: 800; font-size: 16px; white-space: nowrap; }
+.cal-week { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-size: 12px; color: #9a9a9d; margin-bottom: 4px; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+.cal-day {
+  position: relative; aspect-ratio: 1; border: none; background: none;
+  font-size: 14px; color: #333; cursor: pointer; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-family: var(--font-en);
+}
+.cal-day.has { font-weight: 700; color: #1a1a1a; }
+.cal-day.sel { background: var(--orange-500); color: #fff; }
+.cal-dot { position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 5px; height: 5px; border-radius: 50%; background: var(--orange-500); }
+.cal-day.sel .cal-dot { background: #fff; }
+
+.hist-title { text-align: center; font-size: 16px; font-weight: 800; color: var(--orange-900); margin: 2px 0 12px; }
+.hist-list { display: flex; flex-direction: column; }
+.hist-row {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  padding: 15px 4px; border: none; background: none; cursor: pointer;
+  font-family: inherit; text-align: left; border-top: 1px solid rgba(210, 190, 180, 0.28);
+}
+.hist-row:first-child { border-top: none; }
+.hist-row.on { background: rgba(255, 245, 240, 0.6); border-radius: 14px; }
+.hist-date { min-width: 92px; flex: none; }
+.hist-date .d { font-size: 12px; color: #9a9a9d; }
+.hist-date .p { font-size: 15px; font-weight: 700; margin-top: 3px; }
+.hist-stats { flex: 1; display: flex; align-items: center; justify-content: space-around; }
+.hist-stats > div { text-align: center; padding: 0 8px; }
+.hist-stats > div + div { border-left: 1px solid rgba(210, 190, 180, 0.4); }
+.hist-stats b { display: block; font-size: 15px; font-weight: 700; color: #1a1a1a; font-family: var(--font-en); }
+.hist-stats span { font-size: 11px; color: var(--orange-900); white-space: nowrap; }
+.hist-share { color: #1a1a1a; display: flex; align-items: center; }
+.hist-share-ico { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.hist-chev { color: #c4c4c6; font-size: 20px; }
+
+/* ===== 환자 리포트 (3D 선맵 / 숫자표) ===== */
+.page.rp { background: linear-gradient(180deg, #eef2f6 0%, #f4f1ee 52%, #fff 100%); gap: 14px; }
+.rp-head { display: flex; align-items: flex-end; justify-content: space-between; }
+.rp-kicker { font-size: 12px; color: var(--teal-700); font-weight: 600; }
+.rp-title { font-size: 22px; font-weight: 800; margin: 2px 0 0; }
+.rp-date { font-family: var(--font-en); color: #9a9a9d; font-weight: 600; }
+
+.rp-tabs { display: flex; gap: 4px; background: rgba(230, 230, 232, 0.6); border-radius: 14px; padding: 4px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.rp-tabs button { flex: 1; border: none; background: none; padding: 11px; border-radius: 10px; font-size: 14px; font-weight: 700; color: #8a8a8d; cursor: pointer; font-family: inherit; }
+.rp-tabs button.on { background: #fff; color: #1a1a1a; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08); }
+
+.rp-map-card, .rp-table-card {
+  background: rgba(255, 255, 255, 0.52);
+  backdrop-filter: blur(20px) saturate(1.3);
+  -webkit-backdrop-filter: blur(20px) saturate(1.3);
+  border: 1px solid var(--teal-100);
+  border-radius: 24px;
+  box-shadow: 0 8px 26px rgba(120, 140, 160, 0.1);
+  padding: 16px;
+}
+.rp-map-face { position: relative; height: 46vh; min-height: 340px; background: #eeedef; border-radius: 18px; overflow: hidden; }
+.rp-legend { display: flex; flex-direction: column; gap: 6px; margin-top: 14px; padding: 0 4px; }
+.rp-legend span { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #555; }
+.rp-legend i { width: 16px; height: 4px; border-radius: 2px; flex: none; }
+.rp-total-line { text-align: center; margin-top: 12px; font-size: 14px; color: #666; }
+.rp-total-line b { font-family: var(--font-en); color: var(--ink-900); font-size: 18px; }
+
+.rp-table { font-size: 13px; }
+.rp-thead { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 0.9fr; padding: 8px 10px; color: #8a8a8d; font-size: 12px; border-bottom: 1px solid #e6e6e8; }
+.rp-thead span { text-align: center; }
+.rp-thead span:first-child { text-align: left; }
+.rp-dcol { display: inline-flex; align-items: center; justify-content: center; gap: 4px; }
+.rp-dcol i { width: 8px; height: 8px; border-radius: 50%; }
+.rp-group-h { font-weight: 800; font-size: 13px; color: var(--teal-900); padding: 12px 10px 4px; }
+.rp-row { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 0.9fr; padding: 9px 10px; align-items: center; border-bottom: 1px solid #f0f0f2; }
+.rp-row span { text-align: center; font-family: var(--font-en); font-weight: 600; color: #333; }
+.rp-zone { text-align: left !important; font-family: var(--font-kr) !important; color: #333; }
+.rp-row .zero { color: #cdcdcf; font-weight: 400; }
+.rp-csum { font-weight: 800 !important; color: var(--orange-900) !important; }
+.rp-sum { background: rgba(255, 240, 232, 0.5); border-radius: 12px; border-bottom: none; margin-top: 6px; }
+.rp-sum span { font-weight: 800; }
+
+/* 병원 홈 좌우 측면 얼굴 2개 */
+.ch-faces { display: flex; gap: 12px; margin-bottom: 16px; }
+.ch-faces .ch-face { flex: 1; height: 300px; margin-bottom: 0; }
+
+/* 최근 시술 헤더 날짜 */
+.hm-sec-head { display: flex; align-items: baseline; justify-content: space-between; margin: 0 4px 10px; }
+.hm-sec-head .hm-sec-title { margin: 0; }
+.hm-sec-date { font-size: 12px; color: var(--teal-700); font-family: var(--font-en); font-weight: 600; }
+
+/* ===== 공유 카드 모달 ===== */
+.sc-overlay {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(245, 245, 247, 0.45);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 24px 20px calc(env(safe-area-inset-bottom) + 96px);
+}
+.sc-wrap { width: 100%; max-width: 440px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.sc-close { align-self: flex-end; background: none; border: none; color: #9a9a9d; font-size: 14px; font-weight: 600; padding: 4px 2px; cursor: pointer; }
+.sc-card {
+  background-color: #fff;
+  background-image: radial-gradient(rgba(249, 122, 77, 0.12) 1px, transparent 1.4px);
+  background-size: 11px 11px;
+  border: 1.5px solid var(--orange-500);
+  border-radius: 22px;
+  padding: 22px 22px 18px;
+  box-shadow: 0 14px 44px rgba(249, 122, 77, 0.18);
+}
+.sc-row-top { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 18px; }
+.sc-brand { font-size: 22px; font-weight: 800; }
+.sc-sub { font-size: 13px; color: #8a8a8d; font-weight: 600; }
+.sc-stats { display: flex; align-items: center; gap: 14px; }
+.sc-big { flex: 1; }
+.sc-big b { font-family: var(--font-en); font-size: 40px; font-weight: 800; color: var(--orange-900); }
+.sc-big span { font-size: 15px; color: var(--orange-500); font-weight: 700; margin-left: 4px; }
+.sc-stat { text-align: center; }
+.sc-stat b { display: block; font-family: var(--font-en); font-size: 22px; font-weight: 800; color: var(--orange-900); }
+.sc-stat span { font-size: 11px; color: #8a8a8d; }
+.sc-divider { height: 1px; background: rgba(249, 122, 77, 0.2); margin: 16px 0; }
+.sc-msg { color: var(--orange-900); font-size: 14px; font-weight: 600; line-height: 1.65; margin: 0; }
+.sc-row-bottom { display: flex; justify-content: space-between; font-size: 13px; color: #555; }
+.sc-date { color: #9a9a9d; font-family: var(--font-en); }
+.sc-actions { display: flex; gap: 12px; }
+.sc-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 16px; border-radius: 16px; font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer; border: none; }
+.sc-btn.ghost { background: #fff; border: 1.5px solid var(--orange-100); color: var(--orange-900); }
+.sc-btn.primary { background: linear-gradient(135deg, #ffa06e, #f97a4d); color: #fff; }
+.sc-ico { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ===== 홈 구역별 샷수 칩 ===== */
+.hm-zones {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(18px) saturate(1.3);
+  -webkit-backdrop-filter: blur(18px) saturate(1.3);
+  border: 1px solid var(--teal-100);
+  border-radius: 20px;
+  box-shadow: 0 8px 26px rgba(120, 140, 160, 0.1);
+  padding: 16px 16px 18px;
+}
+.skin-title.tealt { color: var(--teal-900); }
+.hz-group { margin-top: 10px; }
+.hz-glabel { font-size: 12px; color: #8a8a8d; font-weight: 600; margin: 0 2px 6px; }
+.hz-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.hz-chip { display: flex; align-items: center; gap: 6px; background: #fff; border: 1px solid #e6e6e8; border-radius: 999px; padding: 7px 12px; font-size: 13px; font-family: inherit; cursor: pointer; }
+.hz-chip .hz-id { font-weight: 600; color: #333; }
+.hz-chip .hz-n { font-family: var(--font-en); font-weight: 800; color: var(--orange-900); }
+.hz-chip.on { border-color: var(--orange-500); background: #fff5f0; }
+.hz-detail { margin-top: 12px; background: #fff6f1; border-radius: 12px; padding: 12px 14px; font-size: 13px; color: #333; }
+.hz-detail b { color: var(--orange-900); }
+.hz-detail-depths { display: flex; gap: 14px; margin-top: 8px; }
+.hz-detail-depths em { display: flex; align-items: center; gap: 5px; font-style: normal; font-family: var(--font-en); font-size: 13px; color: #555; }
+.hz-detail-depths i { width: 9px; height: 9px; border-radius: 50%; }
+
+.hz-hint { color: #9a9a9d; font-size: 13px; padding: 10px 2px 4px; }
+.hz-detail-top { margin-bottom: 8px; }
+
+/* ===== 환자 프로필 (글래스) ===== */
+.page.profile { background: linear-gradient(180deg, #eef2f6 0%, #f4f1ee 52%, #fff 100%); gap: 16px; }
+.pf-hero {
+  background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(20px) saturate(1.3); -webkit-backdrop-filter: blur(20px) saturate(1.3);
+  border: 1px solid var(--teal-100); border-radius: 24px; box-shadow: 0 8px 26px rgba(120, 140, 160, 0.1);
+  padding: 28px; display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.pf-avatar { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--teal-700), var(--teal-900)); color: #fff; font-size: 34px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.pf-name { font-size: 22px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+.pf-grade { font-size: 11px; font-weight: 800; color: #fff; background: linear-gradient(135deg, #f0c27b, #eb6732); padding: 4px 10px; border-radius: 999px; letter-spacing: 0.5px; }
+.pf-code { font-size: 13px; color: #8a8a8d; font-family: var(--font-en); }
+
+.pf-card, .pf-menu {
+  background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(18px) saturate(1.3); -webkit-backdrop-filter: blur(18px) saturate(1.3);
+  border: 1px solid rgba(255, 255, 255, 0.7); border-radius: 20px; box-shadow: 0 6px 20px rgba(120, 140, 160, 0.08); padding: 4px 18px;
+}
+.pf-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(200, 200, 210, 0.25); }
+.pf-row:last-child { border-bottom: none; }
+.pf-row .l { color: #8a8a8d; font-size: 14px; }
+.pf-row .v { font-weight: 600; font-size: 15px; }
+
+.pf-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.pf-stat { background: rgba(255, 255, 255, 0.55); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, 0.7); border-radius: 18px; box-shadow: 0 4px 14px rgba(120, 140, 160, 0.08); padding: 18px 8px; text-align: center; }
+.pf-stat b { display: block; font-family: var(--font-en); font-size: 24px; font-weight: 800; color: var(--teal-900); }
+.pf-stat span { font-size: 11px; color: #8a8a8d; margin-top: 4px; display: block; }
+
+.pf-menu-row { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 16px 0; border: none; background: none; border-bottom: 1px solid rgba(200, 200, 210, 0.25); font-size: 15px; font-family: inherit; color: #1a1a1a; cursor: pointer; }
+.pf-menu-row:last-child { border-bottom: none; }
+.pf-menu-row .chev { color: #c4c4c6; font-size: 20px; }
+.pf-switch { width: 46px; height: 27px; border-radius: 999px; background: #d8d8da; border: none; position: relative; cursor: pointer; transition: background 0.18s; flex: none; }
+.pf-switch i { position: absolute; top: 3px; left: 3px; width: 21px; height: 21px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); transition: left 0.18s; }
+.pf-switch.on { background: var(--orange-500); }
+.pf-switch.on i { left: 22px; }
+
+.pf-logout { width: 100%; padding: 16px; border: 1px solid var(--orange-100); background: #fff; color: var(--orange-900); border-radius: 16px; font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer; margin-bottom: 8px; }
+
+/* 구역 개별 토글 칩 */
+.fzt-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; justify-content: center; }
+.fzt { border: 1px solid #dcdce0; background: #fff; color: #9a9a9d; border-radius: 999px; padding: 6px 12px; font-size: 12px; font-weight: 700; font-family: var(--font-en); cursor: pointer; }
+.fzt.on { border-color: var(--teal-700); background: var(--teal-050); color: var(--teal-900); }
+.fzt.sel { box-shadow: 0 0 0 2px var(--orange-500); border-color: var(--orange-500); }
+.fzt.all { font-family: var(--font-kr); }
+
+/* 구역별 샷수 힌트 (미선택) */
+.hz-hint { display: flex; align-items: center; justify-content: center; gap: 8px; color: #8a8a8d; font-size: 14px; font-weight: 500; padding: 16px 8px 8px; text-align: center; }
+.hz-hint-emoji { font-size: 18px; }
+
+/* 코드 발급 - SMS */
+.op-sms { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.op-sms-state { font-size: 13px; color: #8a8a8d; }
+.op-sms-btn { border: 1.5px solid var(--orange-500); background: #fff; color: var(--orange-900); border-radius: 12px; padding: 10px 16px; font-size: 14px; font-weight: 700; font-family: inherit; cursor: pointer; }
+.op-sms-btn:disabled { opacity: 0.5; cursor: default; }
+
+/* 시술중 부위별 진행 - 스크롤 고정 높이 */
+.oplive-rows { max-height: 230px; overflow-y: auto; padding-right: 4px; }
+
+/* ===== 시술자용 시술 리포트 (가로) ===== */
+.oprep { background: #fff; min-height: 100%; padding: 22px 28px 40px; display: flex; flex-direction: column; gap: 20px; color: #1a1a1a; }
+.oprep-head { display: flex; align-items: center; gap: 30px; }
+.oprep-meta { display: flex; gap: 30px; }
+.oprep-metacol { display: flex; flex-direction: column; gap: 3px; }
+.oprep-metacol .l { font-size: 12px; color: #9a9a9d; }
+.oprep-metacol .v { font-size: 16px; font-weight: 700; }
+.oprep-exit { margin-left: auto; }
+
+.oprep-body { display: flex; gap: 24px; align-items: stretch; height: min(76vh, 660px); }
+.oprep-face { flex: 1; min-width: 300px; height: 100%; background: #eeedef; border-radius: 22px; position: relative; overflow: hidden; }
+.oprep-right { flex: 1.1; display: flex; flex-direction: column; gap: 16px; min-width: 0; min-height: 0; }
+.oprep-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.oprep-stat { background: #f7f7f8; border-radius: 16px; padding: 18px 12px; text-align: center; }
+.oprep-stat .v { font-family: var(--font-en); font-size: 28px; font-weight: 800; color: var(--orange-900); line-height: 1.1; }
+.oprep-stat .v em { font-size: 14px; font-style: normal; margin-left: 2px; }
+.oprep-stat .l { font-size: 12px; color: #8a8a8d; margin-top: 4px; }
+
+.oprep-table-card { background: #f7f7f8; border-radius: 20px; padding: 16px 18px; flex: 1; display: flex; flex-direction: column; min-height: 0; }
+.oprep-table-head { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 0.9fr; padding: 4px 8px 8px; font-size: 12px; color: #8a8a8d; border-bottom: 1px solid #e6e6e8; }
+.oprep-table-head span { text-align: center; }
+.oprep-table-head span:first-child { text-align: left; }
+.oprep-table-head .dcol { display: inline-flex; align-items: center; justify-content: center; gap: 4px; }
+.oprep-table-head .dcol i { width: 8px; height: 8px; border-radius: 50%; }
+.oprep-table-body { overflow-y: auto; flex: 1; }
+.oprep-group-h { font-weight: 800; font-size: 13px; color: var(--teal-900); padding: 10px 8px 2px; }
+.oprep-row { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 0.9fr; padding: 8px; align-items: center; border-bottom: 1px solid #eee; font-family: var(--font-en); font-weight: 600; }
+.oprep-row span { text-align: center; }
+.oprep-row .zn { text-align: left; font-family: var(--font-kr); }
+.oprep-row .zero { color: #cdcdcf; font-weight: 400; }
+.oprep-row .csum { color: var(--orange-900); font-weight: 800; }
+.oprep-row.clickable { cursor: pointer; border-radius: 10px; transition: background 0.12s; }
+.oprep-row.clickable:hover { background: #f0f0f2; }
+.oprep-row.sel { background: rgba(255, 154, 107, 0.14); box-shadow: inset 0 0 0 1.5px rgba(255, 122, 71, 0.5); }
+.oprep-sum { background: rgba(255, 240, 232, 0.7); border-radius: 12px; border-bottom: none; border-top: 1px solid #eadfd8; margin-top: 8px; flex: none; }
+
+@media (max-width: 900px) {
+  .oprep-body { flex-direction: column; height: auto; }
+  .oprep-face { height: 44vh; min-height: 300px; }
+  .oprep-stats { grid-template-columns: repeat(2, 1fr); }
+  .oprep-head { flex-wrap: wrap; gap: 16px; }
+  .oprep-meta { gap: 18px; flex-wrap: wrap; }
+}
+
+/* 3D 얼굴 청크 로딩 폴백 */
+.face3d-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--muted);
 }

@@ -1,79 +1,154 @@
-import { kpis, todaySchedule, retention, monthlyTrend } from '../data/clinic.js'
-import DashNav from '../components/DashNav.jsx'
-import PatientAvatar from '../components/PatientAvatar.jsx'
+import { useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import DashShell from '../components/DashShell.jsx'
+import Face3D from '../components/LazyFace3D.jsx'
+import { patients } from '../data/clinic.js'
+import { createSession } from '../lib/db.js'
+
+const OPERATOR = 'Gil Dong Lee'
+const CLINIC_ID = 'rosota'
+const DEVICE = '울쎄라 (Ulthera SPT)'
+
+// 데모용 환자 코드/성별 파생 (실제로는 등록 시 발급)
+const codeOf = (p) => 10000 + (parseInt(p.id.replace(/\D/g, ''), 10) * 4137) % 90000
+const PLAN = [
+  { mm: '4.5', n: 139, color: '#3fd0ff' },
+  { mm: '3.5', n: 101, color: '#ffb74d' },
+  { mm: '1.5', n: 108, color: '#c58bff' },
+]
+const PLAN_TOTAL = PLAN.reduce((s, p) => s + p.n, 0)
 
 export default function DashboardPage() {
-  const maxTrend = Math.max(...monthlyTrend.map((t) => t.v))
+  const navigate = useNavigate()
+  const [q, setQ] = useState('')
+  const [selId, setSelId] = useState(patients[0].id)
+  const [busy, setBusy] = useState(false)
+
+  const list = useMemo(
+    () => patients.filter((p) => p.name.includes(q) || String(codeOf(p)).includes(q)),
+    [q],
+  )
+  const sel = patients.find((p) => p.id === selId)
+
+  async function startTreatment(p) {
+    setBusy(true)
+    try {
+      const sessionId = await createSession({
+        patientId: p.id,
+        patientCode: String(codeOf(p)),
+        clinicId: CLINIC_ID,
+        doctorId: 'd1',
+        procedure: '울쎄라 리프팅',
+        device: DEVICE,
+      })
+      navigate(`/op/session/${sessionId}`)
+    } catch (e) {
+      alert('세션 생성 실패: ' + e.message)
+      setBusy(false)
+    }
+  }
 
   return (
-    <div className="dash">
-      <DashNav />
+    <DashShell operator={OPERATOR}>
+      <div className="ch-body">
+        {/* 좌: 등록 + 검색 + 목록 */}
+        <div className="ch-left">
+          <button className="ch-newlink" onClick={() => navigate('/op/register')}>
+            신규 환자 등록하기 →
+          </button>
 
-      {/* 월별 시술 추이 (맨 위, 박스 없이 가로 스크롤) */}
-      <div className="trend">
-        <div className="trend-head">
-          <h2>월별 시술 추이</h2>
-          <span className="muted">최근 {monthlyTrend.length}개월</span>
+          <label className="ch-search">
+            <svg viewBox="0 0 24 24" className="ch-search-ico">
+              <circle cx="11" cy="11" r="7" />
+              <path d="M21 21l-4-4" />
+            </svg>
+            <input
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="환자 이름 또는 코드 번호로 검색"
+            />
+          </label>
+
+          <div className="ch-list">
+            {list.map((p) => {
+              const on = p.id === selId
+              return (
+                <div key={p.id} className={`ch-pcard${on ? ' on' : ''}`}>
+                  <div className="ch-pinfo">
+                    <div className="ch-pname">
+                      {p.name} <span className="ch-pcode">#{codeOf(p)}</span>
+                    </div>
+                    <div className="ch-pmeta">여 / {p.age} / Ultherapy</div>
+                  </div>
+                  <button className="ch-ptoggle" onClick={() => setSelId(on ? null : p.id)}>
+                    {on ? '닫기' : '보기'}
+                  </button>
+                </div>
+              )
+            })}
+            {list.length === 0 && <div className="muted" style={{ padding: 16 }}>검색 결과가 없어요.</div>}
+          </div>
         </div>
-        <div className="trend-strip">
-          {monthlyTrend.map((t) => (
-            <div key={t.m} className="trend-item">
-              <span className="trend-val">{t.v}</span>
-              <div className="trend-bar-wrap">
-                <div className="trend-bar" style={{ height: `${(t.v / maxTrend) * 72}px` }} />
-              </div>
-              <span className="trend-m">{t.m}</span>
+
+        {/* 우: 선택 환자 상세 + 시술 계획 */}
+        {sel ? (
+          <div className="ch-detail">
+            <div className="ch-detail-head">
+              <h2>
+                {sel.name} <span className="ch-pcode">#{codeOf(sel)}</span>
+              </h2>
             </div>
-          ))}
-        </div>
+
+            <div className="ch-plan-top">
+              <div className="ch-history">
+                <div className="ch-history-label">지난 시술</div>
+                {sel.history.slice(-2).map((h) => (
+                  <div className="ch-history-row" key={h.n}>
+                    <span>울쎄라 {h.n}회차</span>
+                    <span className="muted">{fmt(h.date)}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="ch-plan-title">
+                시술 계획 - 울쎄라 {sel.visits + 1}회차
+              </div>
+              <div className="ch-plan-total">총 {PLAN_TOTAL} 샷</div>
+            </div>
+
+            <div className="ch-chips">
+              {PLAN.map((p) => (
+                <div className="ch-chip" key={p.mm} style={{ '--c': p.color }}>
+                  {p.mm}mm / {p.n}
+                </div>
+              ))}
+            </div>
+
+            <div className="ch-faces">
+              <div className="ch-face">
+                <Face3D mode="skin" maskZones view="left" />
+              </div>
+              <div className="ch-face">
+                <Face3D mode="skin" maskZones view="right" />
+              </div>
+            </div>
+
+            <div className="ch-actions">
+              <button className="op-btn primary" disabled={busy} onClick={() => startTreatment(sel)}>
+                {busy ? '세션 생성 중…' : '시술 시작하기'}
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="ch-detail ch-empty">
+            <div className="muted">환자를 선택하거나 신규 등록하세요.</div>
+          </div>
+        )}
       </div>
-
-      {/* KPI (작고 깔끔하게) */}
-      <section className="dash-kpis">
-        <div className="dash-kpi"><div className="dash-kpi-v">{kpis.todaySessions}</div><div className="dash-kpi-l">오늘 시술</div></div>
-        <div className="dash-kpi"><div className="dash-kpi-v">{kpis.weekBookings}</div><div className="dash-kpi-l">이번 주 예약</div></div>
-        <div className="dash-kpi"><div className="dash-kpi-v">{kpis.avgCoverage}<small>%</small></div><div className="dash-kpi-l">평균 커버리지</div></div>
-        <div className="dash-kpi"><div className="dash-kpi-v">{kpis.adherence}<small>%</small></div><div className="dash-kpi-l">프로토콜 준수율</div></div>
-      </section>
-
-      {/* 오늘의 시술 현황 */}
-      <section className="panel">
-        <div className="panel-head"><h2>오늘의 시술 현황</h2><span className="muted">{todaySchedule.length}건</span></div>
-        <div className="sched">
-          {todaySchedule.map((s, i) => (
-            <div key={i} className="sched-row">
-              <div className="sched-time">{s.time}</div>
-              <div className="sched-body">
-                <div className="sched-patient">{s.patient}</div>
-                <div className="muted">{s.procedure} · {s.doctor} 원장</div>
-              </div>
-              <span className={`status status-${s.status}`}>
-                {s.status === '시술중' && <span className="dot-pulse" />}
-                {s.status}{s.coverage ? ` ${s.coverage}%` : ''}
-              </span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 재방문 관리 (맨 밑) */}
-      <section className="panel">
-        <div className="panel-head"><h2>재방문 관리</h2><span className="badge-soft">{retention.length}명 대상</span></div>
-        <div className="muted panel-desc">리프팅 주기(약 12개월)가 도래한 환자예요. 재방문을 유도해보세요.</div>
-        <div className="retain">
-          {retention.map((r, i) => (
-            <div key={i} className="retain-row">
-              <PatientAvatar p={{ name: r.name }} size={38} />
-              <div className="retain-body">
-                <div className="retain-name">{r.name}</div>
-                <div className="muted">{r.procedure} · 마지막 {r.lastDate}</div>
-              </div>
-              <span className="retain-months">{r.months}개월 경과</span>
-              <button className="retain-btn">연락</button>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div>
+    </DashShell>
   )
+}
+
+function fmt(d) {
+  const [, m, day] = d.split('-')
+  return `${Number(m)}월 ${Number(day)}일`
 }

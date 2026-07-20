@@ -115,3 +115,35 @@ export const patients = [
     ],
   },
 ]
+
+// ===== 시술 커버리지(품질) 대시보드 데이터 =====
+export const clinicQuality = {
+  kpis: [
+    { label: '병원 프로토콜 준수 평균', value: 93, unit: '%', delta: 2, deltaUnit: '%p', up: true },
+    { label: '이번 달 총 시술', value: 106, unit: '건', delta: 8, up: true },
+    { label: '평균 커버리지', value: 89, unit: '%', delta: 1, deltaUnit: '%p', up: true },
+    { label: '품질 플래그/불균형', value: 4, unit: '건', delta: 2, up: false, flag: true },
+  ],
+  adherenceAvg: 93,
+  doctorAdherence: [
+    { name: '박서준', adherence: 96, delta: 2 },
+    { name: '이수민', adherence: 92, delta: 1 },
+    { name: '정하늘', adherence: 89, delta: 3 },
+  ],
+  trend: [
+    { m: '2월', v: 88 }, { m: '3월', v: 89 }, { m: '4월', v: 91 },
+    { m: '5월', v: 92 }, { m: '6월', v: 91 }, { m: '7월', v: 93 },
+  ],
+  // 부위(구역)별 커버리지 좌/우 %
+  coverageZones: [
+    { id: 'MB', L: 92, R: 92 },
+    { id: 'LO', L: 98, R: 98 },
+    { id: 'C3', L: 98, R: 97 },
+    { id: 'C2', L: 90, R: 89 },
+    { id: 'C1', L: 88, R: 86 },
+    { id: 'IO', L: 91, R: 90 },
+    { id: 'S2', L: 86, R: 85 },
+    { id: 'S3', L: 85, R: 84 },
+    { id: 'S4', L: 84, R: 80 },
+  ],
+}

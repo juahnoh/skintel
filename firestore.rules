@@ -1,0 +1,49 @@
+rules_version = '2';
+
+// 개발 초기 규칙: 읽기 허용(데모), 클라이언트 쓰기 금지.
+// 시딩/디바이스 쓰기는 콘솔 "테스트 모드" 또는 에뮬레이터에서 수행한 뒤,
+// 이 규칙을 배포(firebase deploy --only firestore:rules)하세요.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /clinics/{clinicId} {
+      allow read: if true;
+      allow write: if false;
+      match /doctors/{doctorId} {
+        allow read: if true;
+        allow write: if false;
+      }
+    }
+    match /patients/{patientId} {
+      allow read: if true;
+      allow write: if false;
+    }
+    match /sessions/{sessionId} {
+      allow read: if true;
+      allow write: if false;
+      // 실시간 샷 좌표 — 시술 중 디바이스가 기록 (추후 Auth 로 operator 만 허용)
+      match /shots/{shotId} {
+        allow read: if true;
+        allow write: if false;
+      }
+    }
+    match /bookings/{bookingId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // ── Auth 도입 후 프로덕션 규칙 예시 (현재는 주석) ──────────────
+    // match /patients/{patientId} {
+    //   allow read: if request.auth != null;                 // 환자 본인/직원
+    //   allow write: if request.auth.token.role == 'staff';  // 등록은 직원만
+    // }
+    // match /sessions/{sessionId} {
+    //   allow read: if request.auth != null;
+    //   allow create, update: if request.auth.token.role == 'operator';
+    //   match /shots/{shotId} {
+    //     allow read: if request.auth != null;
+    //     allow create: if request.auth.token.role == 'operator'; // 시술 중 디바이스
+    //   }
+    // }
+  }
+}

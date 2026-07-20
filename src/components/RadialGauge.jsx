@@ -1,22 +1,23 @@
-// SVG 원형 게이지 (레퍼런스의 Radiance / Glow / Acne% 링).
-export default function RadialGauge({ value = 0, label, color = '#8b6fc4', size = 84, suffix = '%' }) {
-  const stroke = 7
+// SVG 원형 게이지. variant="thick" 는 Figma 피부 개선 지표용(두꺼운 링 + 회색 트랙).
+export default function RadialGauge({
+  value = 0,
+  label,
+  color = '#8b6fc4',
+  track = 'rgba(0,0,0,0.06)',
+  size = 84,
+  suffix = '%',
+  variant = 'default',
+}) {
+  const stroke = variant === 'thick' ? 10 : 7
   const r = (size - stroke) / 2
   const c = 2 * Math.PI * r
   const pct = Math.max(0, Math.min(100, value))
   const offset = c * (1 - pct / 100)
 
   return (
-    <div className="gauge">
+    <div className={`gauge${variant === 'thick' ? ' gauge-thick' : ''}`}>
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-        <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={r}
-          fill="none"
-          stroke="rgba(0,0,0,0.06)"
-          strokeWidth={stroke}
-        />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={track} strokeWidth={stroke} />
         <circle
           cx={size / 2}
           cy={size / 2}

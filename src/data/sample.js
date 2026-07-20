@@ -70,9 +70,9 @@ export const report = {
     return Math.round(TIPS.reduce((s, t) => s + tipTotal(t.mm) * t.energyJ, 0))
   },
   metrics: [
-    { label: '리프팅', value: 78, color: '#8b6fc4' },
-    { label: '탄력', value: 64, color: '#e08aa8' },
-    { label: '윤곽', value: 52, color: '#e0a15a' },
+    { label: '리프팅', value: 50, color: '#ff9064' },
+    { label: '탄력', value: 25, color: '#ff9064' },
+    { label: '윤곽', value: 75, color: '#ff9064' },
   ],
   // 지난 시술(2회차) 대비 오늘
   compare: [
@@ -97,4 +97,11 @@ export const bookings = [
   { id: 'b2', date: '2025-07-10', time: '11:00', menu: '울쎄라 리프팅', practitioner: '이수민 원장', status: '예약확정' },
   { id: 'b3', date: '2025-07-24', time: '16:30', menu: '울쎄라 리프팅', practitioner: '박서준 원장', status: '예약확정' },
   { id: 'b0', date: '2025-05-20', time: '10:30', menu: '울쎄라 리프팅', practitioner: '박서준 원장', status: '완료', reportId: 's1' },
+]
+
+// 환자 과거 시술 내역 (달력·내역 표시용)
+export const treatmentHistory = [
+  { id: 'h3', date: '2025-11-02', procedure: '울쎄라 리프팅', shots: 446, coverage: 92, durationMin: 42 },
+  { id: 'h2', date: '2025-07-03', procedure: '울쎄라 리프팅', shots: 440, coverage: 94, durationMin: 41 },
+  { id: 'h1', date: '2025-03-12', procedure: '울쎄라 리프팅', shots: 420, coverage: 88, durationMin: 39 },
 ]
